@@ -1,6 +1,8 @@
 import 'package:ecommerce_app/cartpage.dart';
 import 'package:ecommerce_app/front_page.dart';
 import 'package:ecommerce_app/home_page.dart';
+import 'package:ecommerce_app/productdetails.dart';
+import 'package:ecommerce_app/signin.dart';
 import 'package:flutter/material.dart';
 
 import 'bottomnavbar.dart';
@@ -9,9 +11,9 @@ import 'bottomnavbar.dart';
 //navigation_three (page three) not included
 class AppRoutes {
   static const cartDesign="cartDesignpage";
-  static const userDesign1="userDesignpage";
   static const homePage="homepagedesign";
   static const bottomnavbar="bottomnavbarpagedesign";
+  static const signin="signInpagedesign";
 
 }
 class AppRouter{
@@ -24,9 +26,9 @@ class AppRouter{
           settings: settings,
           fullscreenDialog: true,
         );
-      case AppRoutes.userDesign1:
+      case AppRoutes.signin:
         return MaterialPageRoute<dynamic>(
-          builder: (_) =>frontpageDesign(),
+          builder: (_) =>SignInPage(),
           settings: settings,
           fullscreenDialog: true,
         );

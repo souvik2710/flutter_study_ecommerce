@@ -1,6 +1,11 @@
+import 'package:ecommerce_app/bottomnavbar.dart';
+import 'package:ecommerce_app/signin.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'front_page.dart';
 class SignUpPage extends  HookConsumerWidget {
 
 
@@ -121,7 +126,12 @@ class SignUpPage extends  HookConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(right:10.0),
-            child: ElevatedButton(onPressed: (){},
+            child: ElevatedButton(onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)
+              {
+                return SignInPage();
+              }));
+            },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
                     foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
@@ -146,7 +156,12 @@ class SignUpPage extends  HookConsumerWidget {
                         child: Icon(Icons.arrow_forward),
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
-                      onPressed: () => {},
+                      onPressed: () => {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                      {
+                      return BottomNav();
+                      }))
+                      },
                     ),
                   // CircleAvatar (
                   //   radius: 30.0,

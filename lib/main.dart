@@ -3,8 +3,10 @@ import 'package:ecommerce_app/cartpage.dart';
 import 'package:ecommerce_app/code_verification.dart';
 import 'package:ecommerce_app/order_page.dart';
 import 'package:ecommerce_app/productdetails.dart';
+import 'package:ecommerce_app/productlist.dart';
 import 'package:ecommerce_app/profile.dart';
 import 'package:ecommerce_app/routes.dart';
+import 'package:ecommerce_app/searchlist.dart';
 import 'package:ecommerce_app/signin.dart';
 import 'package:ecommerce_app/signup.dart';
 import 'package:ecommerce_app/signupdemofile.dart';
@@ -44,16 +46,18 @@ class MyApp extends StatelessWidget {
 
       home: //const MyHomePage(title: 'Flutter Demo Home Page'),
      //HomePageDesign(),
+      //productListDesign(),
      //SignUpPage(),
      // CodeVerifyPage(),
       //ProfilePage(),
      //BottomNav(),
-     // SplashScreen(),
+      SplashScreen(),
+     //SearchListDesign(),
       //TrackingSystem(),
-      OrderDetails(),
+     // OrderDetails(),
    // CartPage(),
       //ProductDetailsPage(),
-      //SignInPage(),
+   //   SignInPage(),
     );
 
   }

@@ -3,11 +3,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class CommonWidgetproductDesign extends StatefulWidget {
   final String imageLink;
   final String textValue;
-  String priceValue;
+  String sellPriceValue;
+  String discountPriceValue;
+  String discountValue;
   double ratingValue;
 
-  CommonWidgetproductDesign({required this.imageLink,required this.textValue,required this.priceValue,
-    required this.ratingValue});
+  CommonWidgetproductDesign({required this.imageLink,required this.textValue,required this.sellPriceValue,
+    required this.discountPriceValue, required this.discountValue, required this.ratingValue});
 
 
   @override
@@ -22,13 +24,13 @@ class _CommonWidgetproductDesignState extends State<CommonWidgetproductDesign> {
     Column(
         children: [
           Container(
-            margin:  const EdgeInsets.fromLTRB(25.0, 10.0, 0.0, 0.0) ,
+            margin:  const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0) ,
            height: MediaQuery.of(context).size.height*0.5,
-          width:MediaQuery.of(context).size.height*0.3,
+          width:MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image:DecorationImage(
               image:NetworkImage("${widget.imageLink}"),
-              fit:BoxFit.fill,
+              fit:BoxFit.fitHeight,
             ),
             //borderRadius: BorderRadius.all(Radius.circular(20.0)),
             borderRadius: BorderRadius.circular(20.0),
@@ -40,7 +42,8 @@ class _CommonWidgetproductDesignState extends State<CommonWidgetproductDesign> {
             ),
           ),
           Container(
-            height: 100,
+            height: 40,
+            //color:Colors.grey,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -56,7 +59,7 @@ class _CommonWidgetproductDesignState extends State<CommonWidgetproductDesign> {
                 itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => Icon(
                   Icons.star,
-                  color: Colors.amber,
+                  color: Colors.green,
                 ),
                 onRatingUpdate: (rating) {
                   //print(rating);
@@ -67,24 +70,65 @@ class _CommonWidgetproductDesignState extends State<CommonWidgetproductDesign> {
           ),
 
           Container(
-              height: 50,
+            margin:  const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 5.0) ,
+            height: 50,
               width: MediaQuery.of(context).size.width,
-              color: Colors.green[300],
-              child: Padding(
-                padding: const EdgeInsets.only(left:10.0,top:10.0),
-                child: Text("${widget.priceValue}",style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold,
-                    color:Colors.white),),
+              //color: Colors.green[300],
+              child: Row(
+                children:[
+                  Text("${widget.sellPriceValue}",style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold,
+                      color:Colors.grey),),
+                  Text("${widget.discountPriceValue}",style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold,
+                      color:Colors.black),),
+                  Text("${widget.discountValue}",style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold,
+                      color:Colors.green),),
+                ]
               )),
+                  Divider(
+                    color:Colors.grey,
+                    thickness: 3,
+                  ),
+                Container(
+                  margin:  const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 5.0) ,
+                  height: 100,
 
+                  child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.local_shipping),
+                          Text(" Free Delivery ",style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold,
+                               color:Colors.green)),
+                        ],),
+                      Row(
+                        children: [
+                          Icon(Icons.find_replace),
+                          Text(" 10 Days replacement ",style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold,
+                              color:Colors.black)),
+                        ],),
+                      Row(
+                        children: [
+                          Icon(Icons.currency_rupee),
+                          Text(" Cash on Delivery Available ",style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold,
+                              color:Colors.black)),
+                        ],),
+                    ],
+                  ),
+                )
 
-        ])
+             ]),
+
 
     );
   }
 }
 
 class ProductDetailsPage extends StatefulWidget {
-  const ProductDetailsPage({Key? key}) : super(key: key);
+
+  final String imageLink;
+  final String textValue;
+  String priceValue;
+  ProductDetailsPage({required this.imageLink,required this.textValue,required this.priceValue});
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -94,12 +138,32 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //  bottomNavigationBar:ElevatedButton(),
+        bottomNavigationBar:Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              height: 50.0,
+              width:MediaQuery.of(context).size.width*0.5,
+              child: ElevatedButton(style:ElevatedButton.styleFrom(primary: Colors.white),
+                onPressed: (){},
+                  child: Text('Add to Cart ',style: TextStyle(color: Colors.green[500],
+                      fontSize: 20.0, fontWeight: FontWeight.bold),),),
+            ),
+            SizedBox(
+              height: 50.0,
+              width:MediaQuery.of(context).size.width*0.5,
+              child: ElevatedButton(style:ElevatedButton.styleFrom(primary: Colors.red),onPressed: (){},
+                child: Text('Buy Now',style: TextStyle(color: Colors.orange[200],
+                    fontSize: 20.0, fontWeight: FontWeight.bold),),),
+            ),
 
-    body:SingleChildScrollView(
+          ],
+        ),
+
+      body:SingleChildScrollView(
       child: SafeArea(
-        child: CommonWidgetproductDesign(imageLink:"https://cdn1.smartprix.com/rx-iEfM9LzwK-w1200-h1200/EfM9LzwK.jpg",
-            textValue:" Realme C30 (Blue, 32 GB ) (2 GB RAM ) ( 5 MP Front Camera )", priceValue:"20% off ,15000/- ,Rs. 12000 /- ", ratingValue: 3.5),
+        child: CommonWidgetproductDesign(imageLink:"${widget.imageLink}",
+            textValue:" ${widget.textValue} ", sellPriceValue:"MRP 15000/- ",
+            discountPriceValue:"${widget.priceValue}",discountValue:" 20% off ", ratingValue: 3.5),
       ),
     ),
     );

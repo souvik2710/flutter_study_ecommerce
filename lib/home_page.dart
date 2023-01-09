@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ecommerce_app/productlist.dart';
 import 'package:ecommerce_app/routes.dart';
 import 'package:ecommerce_app/view_model.dart';
 import 'package:flutter/material.dart';
@@ -253,26 +254,14 @@ class DotWidget  extends HookConsumerWidget {
 }
 
 
-class CommonWidgetDesign  extends StatefulHookConsumerWidget {
+class CommonWidgetDesign  extends HookConsumerWidget {
   final String imageLink;
   final String textValue1,textValue2;
-
 
   CommonWidgetDesign({required this.imageLink,required this.textValue1,required this.textValue2});
 
   @override
-  CommonWidgetDesignState createState() => CommonWidgetDesignState();
-}
-
-class CommonWidgetDesignState extends ConsumerState<CommonWidgetDesign> {
-  @override
-  void initState() {
-    super.initState();
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Container(child:
     Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -283,15 +272,22 @@ class CommonWidgetDesignState extends ConsumerState<CommonWidgetDesign> {
           color: Colors.white,
           child: Column(//mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              InkWell(
+              onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                  return productListDesign(imageLink: imageLink,textValue: textValue1);
+                  },),);
+                  },
+                child:
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Image.network("${widget.imageLink}",height: 180.0,width: 250.0,),
-              ),
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.network("${imageLink}",height: 180.0,width: 250.0,),
+                      ),),
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left:8.0),
-                    child: Text("${widget.textValue1}",style:TextStyle(fontSize:15.0,)),
+                    child: Text("${textValue1}",style:TextStyle(fontSize:15.0,)),
                   ),
                 ],
               ),
@@ -299,7 +295,7 @@ class CommonWidgetDesignState extends ConsumerState<CommonWidgetDesign> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left:10.0),
-                    child: Text("${widget.textValue2}",style:TextStyle(fontSize:15.0,fontWeight: FontWeight.bold,color:Colors.green)),
+                    child: Text("${textValue2}",style:TextStyle(fontSize:15.0,fontWeight: FontWeight.bold,color:Colors.green)),
                   ),
                 ],
               )
